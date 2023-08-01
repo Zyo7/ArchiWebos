@@ -47,7 +47,7 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
-body {
+.body {
 	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
@@ -137,36 +137,47 @@ li:hover {
 	width: 100%;
 
 }
-#contact {
-	width: 50%;
-margin: auto;
+
+.login {
+	width: 75%;
+	margin: auto;
 }
-#contact > * {
+.formulaire {
+	width: 50%;
+	margin: auto;
+	color: #3D3D3D;
+}
+.formulaire > * {
 	text-align: center;
 
 }
-#contact h2{
+.formulaire h2{
 	margin-bottom: 20px;
 }
-#contact form {
+.formulaire form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+.formulaire input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+.formulaire label {
 	margin: 2em 0 1em 0;
 }
-#contact textarea {
+.formulaire textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.formulaire a {
+	text-align: center;
+	color: #3D3D3D;
 }
 
 input[type="submit"]{
@@ -186,3 +197,98 @@ footer nav ul {
 	margin: 2em
 }
 
+/* Code CSS supplémentaire personnalisé*/
+body {
+	background-color: #FFFEF8;
+}
+
+.blackDiv {
+	display: flex;
+	width: 100%;
+	margin: 0;
+	justify-content: center;
+	background-color: black;
+	color: white;
+}
+.blackDiv p {
+	display: inline-block;
+	padding: 10px 20px;
+	margin: 10px 0;
+	font-family: 'Work Sans';
+	font-weight: 400;
+	font-size: 16px;
+}
+.blackDiv__white {
+	font-size: 14px;
+	color: black;
+	background-color: white;
+	border-radius: 60px;
+	font-weight: 500;
+}
+
+.intro__modifier{
+	width: 80%;
+	margin: auto;
+}
+
+.portfolio__titre {
+	position: relative;
+}
+
+.portfolio__titre--modifier{
+	position: absolute;
+	right: 33%;
+	top: 40%;
+}
+
+.On {
+	display: block;
+}
+
+.Off {
+	display: none;
+}
+
+a {
+	color:#3D3D3D;
+	text-decoration: none;
+}
+a:hover{
+	color: #B1663C;
+}
+
+#filtre {
+	margin-top: 75px;
+	margin-bottom: 50px;
+}
+
+#filtre ul {
+	display: flex;
+	justify-content: center;
+	gap: 15px;
+}
+
+#filtre ul li {
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	padding: 11px 15px;
+	color: #1D6154;
+	font-size: 16px;
+	font-weight: 700;
+	font-family: 'Syne';
+	min-width: 100px;
+	text-align: center;
+}
+
+#filtre ul .selected {
+	background-color: #1D6154;
+	color: white;
+}
+footer {
+	background-color: white;
+	font-family: 'Work Sans';
+	height: 60px;
+	font-size: 14px;
+	font-weight: 300;
+
+}
