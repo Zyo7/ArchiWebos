@@ -15,9 +15,19 @@ async function connexionAPI(user){
     })
 }
 
-const user0 = {
-    "email": "sophie.bluel@test.tld",
-    "password": "S0phie"
-};
-
-//connexionAPI(user0);
+const form = document.querySelector('form');
+form.addEventListener("submit", (event) => {
+    /*
+    event.preventDefault();
+    const user0 = {
+        "email": "sophie.bluel@test.tld",
+        "password": "S0phie"
+    };
+    */
+    const user1 = {
+        "email": document.getElementById("email").value,
+        "password": document.getElementById("password").value
+    };
+    //user1 == user0 ? connexionAPI(user1) : false;
+    connexionAPI(user1);
+});
