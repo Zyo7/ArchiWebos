@@ -8,7 +8,7 @@ async function genGalleryAPI(data){
     }).then(function (res){
         return res.json();
     }).then(function (value){
-        let gallery = document.querySelector(".gallery");
+        gallery.innerHTML = "";
         for(let count2 = 0; count2 < value.length; count2++){
             if(data === value[count2].category.name || data === "Tous"){
                 let figure = document.createElement("figure");
@@ -28,42 +28,17 @@ async function genGalleryAPI(data){
     })
 }
 
-
-async function genCatAPI(){
-    await fetch("http://localhost:5678/api/categories", {
-       method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
-    }).then(function (res){
-        return res.json();
-    }).then(function (value){
-        for(let count1 = -1; count1 < value.length; count1++){
-            let li = document.createElement("li");
-            if(count1 === -1){
-                li.innerHTML = "Tous";
-                li.className = "Tous";
-                li.classList.add("selected");
-            }
-            else{
-                li.innerHTML = value[count1].name;
-                li.className = value[count1].name;
-            }
-            li.classList.add("filtres");
-            ul.appendChild(li);
-        }
-        filtre.appendChild(ul);
-        return ;
-    }).catch(function (error){
-        alert("Non connecté");
-    }) 
-}
-
-genCatAPI();
+filtre.addEventListener("click", (res) => {
+    document.querySelector(".selected").classList.remove("selected");
+    res.target.classList.add("selected");
+    res.target.innerHTML == "Hotels &amp; restaurants" ? selectedName = "Hotels & restaurants" : selectedName = res.target.innerHTML;
+    genGalleryAPI(selectedName);
+});
 
 
-genGalleryAPI("Tous");
+
+
+genGalleryAPI(selectedName);
 
 
 if(token === null){
@@ -92,4 +67,5 @@ else{
     logLink.innerHTML = "login";
     logLink.href = "login.html";
 }
+
 

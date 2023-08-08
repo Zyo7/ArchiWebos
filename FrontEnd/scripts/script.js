@@ -16,3 +16,5 @@ let displayOn = document.querySelectorAll(".On");
 let logLink = document.getElementById("log");
 let filtre = document.getElementById("filtre");
 let ul = document.createElement("ul");
+let gallery = document.querySelector(".gallery");
+let selectedName = document.querySelector(".selected").innerHTML;
