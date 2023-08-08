@@ -1,5 +1,3 @@
-//let token = window.localStorage.getItem("token"); Ne sert que en condition if/else true:false
-
 async function getDataAPI2(data){
     await fetch("http://localhost:5678/api/works", {
         method: 'GET',
@@ -16,5 +14,3 @@ async function getDataAPI2(data){
         alert("Non connecté");
     })
 }
-
-//let token = window.localStorage.clear; Log OUT

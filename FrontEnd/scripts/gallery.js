@@ -35,13 +35,9 @@ filtre.addEventListener("click", (res) => {
     genGalleryAPI(selectedName);
 });
 
-
-
-
 genGalleryAPI(selectedName);
 
-
-if(token === null){
+if(token !== null){
     for(let count = 0; count < displayOff.length; count++){
         displayOff[count].classList.remove("Off");
         if(!displayOff[count].classList.contains("blackDiv")){
@@ -54,6 +50,7 @@ if(token === null){
     }
     logLink.innerHTML = "logout";
     logLink.href = "index.html";
+    logIn = true;
 }
 else{
     for(let count = 0; count < displayOff.length; count++){
@@ -66,6 +63,12 @@ else{
     }
     logLink.innerHTML = "login";
     logLink.href = "login.html";
+    logIn = false;
 }
 
-
+const logOut = document.getElementById("log");
+logOut.addEventListener("click", () => {
+    if(logIn){
+        localStorage.clear();
+    }
+})

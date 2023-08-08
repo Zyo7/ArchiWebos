@@ -9,7 +9,6 @@ async function logMovies() {
 */
 
 let token = window.localStorage.getItem("token");
-//token !== null ? console.log("token plein") : console.log("token vide")
 let login = false;
 let displayOff = document.querySelectorAll(".Off");
 let displayOn = document.querySelectorAll(".On");
@@ -17,4 +16,5 @@ let logLink = document.getElementById("log");
 let filtre = document.getElementById("filtre");
 let ul = document.createElement("ul");
 let gallery = document.querySelector(".gallery");
-let selectedName = document.querySelector(".selected").innerHTML;
+let selectedName = "Tous";
+let logIn = false;
