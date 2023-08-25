@@ -1,4 +1,4 @@
-async function genGalleryAPI(data){
+async function gengaleryAPI(data){
     await fetch("http://localhost:5678/api/works", {
         method: 'GET',
         headers: {
@@ -8,18 +8,38 @@ async function genGalleryAPI(data){
     }).then(function (res){
         return res.json();
     }).then(function (value){
-        gallery.innerHTML = "";
+        galery.innerHTML = "";
+        modal.innerHTML = "";
         for(let count2 = 0; count2 < value.length; count2++){
             if(data === value[count2].category.name || data === "Tous"){
-                let figure = document.createElement("figure");
-                let image = document.createElement("img");
-                image.src = value[count2].imageUrl;
-                image.alt = value[count2].title;
-                let figcat = document.createElement("figcatption");
-                figcat.innerHTML = value[count2].title;
-                figure.appendChild(image);
-                figure.appendChild(figcat);
-                gallery.appendChild(figure);
+                //Générateur pour la galerie
+                let figureGal = document.createElement("figure");
+                let imageGal = document.createElement("img");
+                let figcatGal = document.createElement("figcatption");
+                imageGal.src = value[count2].imageUrl;
+                imageGal.alt = value[count2].title;
+                figcatGal.innerHTML = value[count2].title;
+                figureGal.appendChild(imageGal);
+                figureGal.appendChild(figcatGal);
+                galery.appendChild(figureGal);
+                //générateur pour la modal
+                let figureModal = document.createElement("figure");
+                let trashCan = document.createElement("i");
+                let moveArrow = document.createElement("i");
+                let imageModal = document.createElement("img");
+                let editionPhoto = document.createElement("p");
+                trashCan.classList.add("fa-solid");
+                trashCan.classList.add("fa-trash-can");
+                moveArrow.classList.add("fa-solid");
+                moveArrow.classList.add("fa-up-down-left-right");
+                imageModal.src = value[count2].imageUrl;
+                imageModal.alt = value[count2].title;
+                editionPhoto.innerHTML = "éditer";
+                figureModal.appendChild(trashCan);
+                figureModal.appendChild(moveArrow);
+                figureModal.appendChild(imageModal);
+                figureModal.appendChild(editionPhoto);
+                modal.appendChild(figureModal);
             }
         }
         return ;
@@ -32,11 +52,14 @@ filtre.addEventListener("click", (res) => {
     document.querySelector(".selected").classList.remove("selected");
     res.target.classList.add("selected");
     res.target.innerHTML == "Hotels &amp; restaurants" ? selectedName = "Hotels & restaurants" : selectedName = res.target.innerHTML;
-    genGalleryAPI(selectedName);
+    gengaleryAPI(selectedName);
 });
 
-genGalleryAPI(selectedName);
+gengaleryAPI(selectedName);
 
+
+
+//section scripts selon la présence du token et son retrait
 if(token !== null){
     for(let count = 0; count < displayOff.length; count++){
         displayOff[count].classList.remove("Off");

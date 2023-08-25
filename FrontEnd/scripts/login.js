@@ -32,6 +32,11 @@ buttonLogin.addEventListener("click", () => {
     }).then(function (res){
         return res.json();
     }).then(function (value){
+        console.log(value.message);
+        if(value.message == "user not found"){
+            //JS pour afficher identifiant incorrect ou return avec alert("")
+            return
+        }
         window.localStorage.setItem("token", value.token);
         window.location.href = "./index.html";
     }).catch(function (error){

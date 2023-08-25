@@ -98,6 +98,10 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
+li.bold {
+	font-weight: bold;
+}
 #introduction {
 	display: flex;
 	align-items: center;
@@ -125,7 +129,7 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
-.gallery {
+.galery {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
@@ -133,7 +137,7 @@ li:hover {
 	grid-row-gap: 20px;
 }
 
-.gallery img {
+.galery img {
 	width: 100%;
 
 }
@@ -218,6 +222,11 @@ body {
 	font-weight: 400;
 	font-size: 16px;
 }
+
+.fa-pen-to-square {
+	margin-right: 10px;
+}
+
 .blackDiv__white {
 	font-size: 14px;
 	color: black;
@@ -228,7 +237,7 @@ body {
 
 .intro__modifier{
 	width: 80%;
-	margin: auto;
+	margin: 20px auto 0px;
 }
 
 .portfolio__titre {
@@ -237,8 +246,8 @@ body {
 
 .portfolio__titre--modifier{
 	position: absolute;
-	right: 33%;
-	top: 40%;
+	right: 32%;
+	top: 25%;
 }
 
 .On {
@@ -284,6 +293,7 @@ a:hover{
 	background-color: #1D6154;
 	color: white;
 }
+
 footer {
 	background-color: white;
 	font-family: 'Work Sans';
@@ -291,4 +301,244 @@ footer {
 	font-size: 14px;
 	font-weight: 300;
 
+}
+
+.modal {
+	position: absolute;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+}
+
+.modal-wrapper {
+	width: 420px;
+	height: 641px;
+	border-radius: 10px;
+	padding: 60px 105px 30px;
+	background-color: #FFFEF8;
+}
+
+.modalGalerie {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	position: relative;
+}
+
+.fa-xmark {
+	position: absolute;
+	top: -40px;
+	right: -80px;
+}
+
+.titleModal {
+	text-align: center;
+	color: #000;
+	font-family: "Work Sans";
+	font-weight: 400;
+	font-size: 26px;
+	margin-bottom: 40px;
+}
+
+.galerieModal {
+	overflow: auto;
+	display: flex;
+	flex-wrap: wrap;
+	height: 420px;
+}
+
+.galerieModal figure {
+	width: 76px;
+	flex-basis: 20%;
+	position: relative;
+}
+
+.galerieModal figure i {
+	position: absolute;
+	top: 6px;
+	border-radius: 3px;
+	background-color: rgba(0, 0, 0, 0.9);
+	color: #fff;
+	padding: 3px;
+	font-size: 10px;
+}
+
+.fa-trash-can {
+	right: 12px;
+}
+
+.fa-up-down-left-right {
+	right: 30px;
+}
+
+.galerieModal figure img {
+	height: 102px;
+}
+
+.galerieModal figure p {
+	font-family: "Work Sans";
+	font-weight: 400;
+	font-size: 12px;
+}
+
+.separateur{
+	width: 420px;
+	border-bottom: 2px solid #B3B3B3;
+	margin-top: 20px;
+}
+
+#modifGalerie {
+	display: flex;
+	flex-direction: column;
+}
+
+.ajoutPhoto {
+	font-size: 14px;
+	font-family: "Syne";
+	font-weight: 700;
+	border: none;
+	width: 215px;
+	text-align: center;
+	color: #FFF;
+	background-color: #1D6154;
+	padding: 11px;
+	border-radius: 60px;
+	margin: 40px 0 20px;
+}
+
+.ajoutPhoto:hover, .delete:hover, .fa-xmark:hover, .fa-arrow-left:hover {
+	cursor: pointer;
+}
+
+.delete {
+	margin-top: 20px;
+	width: 230px;
+	margin: 0 auto;
+	color: #D65353;
+	text-align: center;
+}
+
+.modalAjout {
+	position: relative;
+	display: none;
+}
+
+.fa-arrow-left {
+	position: absolute;
+	top: -40px;
+	left: -80px;
+}
+
+.modalFormAjout {
+	display: flex;
+	flex-direction: column;
+}
+
+.divUpload {
+	position: relative;
+	overflow: hidden;
+	width: 420px;
+	height: 169px;
+	background-color: #E8F1F6;
+}
+
+.divUpload:hover *{
+	cursor: pointer;
+}
+
+.divUpload .fa-image {
+	color: #B9C5CC;
+	font-size: 49px;
+	position: absolute;
+	top: 30px;
+	left: 43%;
+}
+
+.divUpload #image{
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0;
+	font-size: 150px;
+}
+
+.divUpload .buttonUpload{
+	position: absolute;
+	top: 95px;
+	left:30%;
+	border: none;
+	border-radius: 50px;
+	font-family: 'Work Sans';
+	font-size: 14px;
+	font-weight: 500;
+	text-align: center;
+	padding: 10px 30px;
+	background-color: #CBD6DC;
+	color: #306685;
+}
+
+.divUpload p {
+	position: absolute;
+	top: 145px;
+	left: 39%;
+	color: #444444;
+	font-family: 'Work Sans';
+	font-size: 10px;
+	font-weight: 400;
+}
+
+.modalFormAjout label {
+	margin: 15px 0 10px;
+	font-family: "Work Sans";
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.modalFormAjout #titre {
+	width: 412px;
+	height: 51px;
+	border: none;
+	box-shadow: 2px 3px 7px -2px rgba(0,0,0,0.2);
+}
+
+.modalFormAjout select {
+	width: 420px;
+	height: 51px;
+	margin-bottom: 25px;
+	border: none;
+	box-shadow: 2px 3px 7px -2px rgba(0,0,0,0.2);
+}
+
+#submitModal {
+	font-size: 14px;
+	font-family: "Syne";
+	font-weight: 700;
+	border: none;
+	width: 237px;
+	text-align: center;
+	color: #FFF;
+	padding: 11px;
+	border-radius: 60px;
+	margin: 40px auto 20px;
+}
+
+#submitModal.submitNOGO {
+	background-color: #A7A7A7;
+}
+
+#submitModal.submitNOGO:hover {
+	cursor: not-allowed;
+}
+
+#submitModal.submitGO {
+	background-color: #1D6154;
+}
+
+#submitModal.submitGO:hover {
+	cursor: pointer;
 }
