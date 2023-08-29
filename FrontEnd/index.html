@@ -104,23 +104,24 @@
 				<i class="fa-solid fa-xmark close-modal2"></i>
 				<h2 class="titleModal">Ajout photo</h2>
 				<form method="post" id="formModal" class="modalFormAjout" name="FormModal" action="#">
-					<div class="divUpload" id="idQuelconque">
-						<i class="fa-regular fa-image"></i>
+					<div class="divUpload">
+						<img src="assets/icons/picture-svg-img.png" alt="Icone par défaut" id="imgUpload">
 						<button class="buttonUpload">+ Ajouter photo</button>
-						<input type="file" name="image" id="image" accept="image/jpeg,image/png,image/jpg" required>
+						<input type="file" name="image" id="image" accept="image/jpeg,image/png,image/jpg">
 						<p>jpg, png : 4mo max</p>
 					</div>
 					<label for="titre">Titre</label>
-					<input type="text" name="titre" id="titre" required>
+					<input type="text" name="titre" id="titre">
 					<label for="categorie">Catégorie</label>
-					<select name="categorie" id="categorie" required>
+					<select name="categorie" id="categorie">
 						<option></option>
 						<option>Objets</option>
 						<option>Appartements</option>
 						<option>Hotels & restaurants</option>
 					</select>
-					<div class="separateur"></div>
+					<div class="separateur"></div>					
 					<input type="submit" value="Valider" id="submitModal">
+					<p id="required">Champs obligatoires</p>
 				</form>
 			</div>
 		</div>

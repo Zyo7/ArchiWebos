@@ -2,6 +2,14 @@ let modalStatut = null;
 let submitModal = document.getElementById("submitModal");
 submitModal.classList.add("submitNOGO");
 let ajoutData = document.getElementById("formModal");
+let submitStatut = false;
+let categorieValue = 0;
+let titleStatut = document.getElementById("titre");
+let fileStatut = document.getElementById("image");
+let categorieStatut = document.getElementById("categorie");
+let deleteGalerie = document.querySelector(".galerieModal");
+const bearerTest = "Bearer " + token;
+
 
 //Gestion de la Modal
 const openModal = (e) => {
@@ -69,47 +77,108 @@ window.addEventListener('keydown', (e) => {
 //Gestion API
 ajoutData.addEventListener("change", (e) => {
     e.preventDefault();
-    let titleStatut = document.getElementById("titre");
-    let fileStatut = document.getElementById("image");
-    let categorieStatut = document.getElementById("categorie");
-    if (fileStatut.files.length != 0 && titleStatut.value.length != 0 && categorieStatut.innerHTML != "") {
+    if(titleStatut.value.length != 0){
+        titleStatut.style.removeProperty("border");
+    }
+    if(categorieStatut.value.length != 0){
+        categorieStatut.style.removeProperty("border");
+    }
+    if(fileStatut.files.length != 0){
+        document.querySelector(".divUpload").style.removeProperty("border");
+    }
+    if (fileStatut.files.length != 0 && titleStatut.value.length != 0 && categorieStatut.value != "") {
+        submitStatut = true;
+        document.getElementById("required").style["display"] = "none";
         submitModal.classList.add("submitGO");
         submitModal.classList.remove("submitNOGO");
-        
-        ajoutData.addEventListener("submit", (e) =>{
-            e.preventDefault();
-            let imageTest = document.querySelector('#idQuelconque input[type=file]');
-            const titleTest = titleStatut.value;
-            const imageTest2 = imageTest.files[0];
-            const dataApi = new FormData();
-            dataApi.append("title", titleTest);
-            dataApi.append("image", imageTest2);
-            dataApi.append("category", 2);
-            const bearerTest = `Bearer ${window.localStorage.getItem("token")}`
-            fetch(`http://localhost:5678/api/works`, {
-                method: 'POST',
-                headers: {
-                    //'Accept': 'application/json',
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': bearerTest
-                },
-                body: dataApi
-            })
-        
-
-        }); 
     }
     else{
+        submitStatut = false;
         submitModal.classList.remove("submitGO");
         submitModal.classList.add("submitNOGO");
     }
+    //modification de l'icone au chargement de l'image
+    /*
+    if(fileStatut.files && fileStatut.files[0]){
+        const preview = new FileReader();
+        preview.onload = function (e) {
+            console.log("ça marche");
+            document.getElementById("imgUpload").src = e.target.result;
+        }
+    }
+    */
 })
 
-const formData = new FormData();
-formData.append('title', 'titre de test');
-console.log(formData);
-console.log(formData.title);
+ajoutData.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if(titleStatut.value.length == 0){
+        titleStatut.style["border"] = "red solid";
+    }
+    if(categorieStatut.value.length == 0){
+        categorieStatut.style["border"] = "red solid";
+    }
+    if(fileStatut.files.length == 0){
+        document.querySelector(".divUpload").style["border"] = "red solid";
+    }
+    if(!submitStatut){
+        document.getElementById("required").style["display"] = "block";
+        return;
+    }
+    console.log(categorieStatut.value);
+    switch (categorieStatut.value) {
+        case "Objets":
+            categorieValue = 1;
+            break;
+        case "Appartements":
+            categorieValue = 2;
+            break;
+        case "Hotels & restaurants":
+            categorieValue = 3;
+            break;
+        default:
+            return;
+    }
+    const titleTest = titleStatut.value;
+    const imageTest = fileStatut.files[0];
+    const dataApi = new FormData();
+    dataApi.append("title", titleTest);
+    dataApi.append("image", imageTest);
+    dataApi.append("category", categorieValue);
 
+    fetch(`http://localhost:5678/api/works`, {
+        method: 'POST',
+        headers: new Headers({
+            'Accept': 'application/json',
+            //'Access-Control-Allow-Origin':'*',
+            //'Content-Type': 'multipart/form-data',
+            'Authorization': bearerTest
+        }),
+        body: dataApi
+    }).then(function (res){
+        return ;
+    }).catch(function (error){
+        alert("Non envoyé");
+    })
+    console.log("La page n'a pas été actualisé");
+
+
+})
+
+deleteGalerie.addEventListener("click", (e) => {
+    console.log(e.target);
+    console.log(e.target.dataset.id);
+    const deleteAPI = new FormData();
+    deleteAPI.append("id", e.target.dataset.id)
+    fetch(`http://localhost:5678/api/works/${e.target.dataset.id}`, {
+        method: 'DELETE',
+        headers: new Headers({
+            'Accept': '*/*',
+            //'Access-Control-Allow-Origin':'*',
+            //'Content-Type': 'multipart/form-data',
+            'Authorization': bearerTest
+        })
+    })
+})
 
 
 

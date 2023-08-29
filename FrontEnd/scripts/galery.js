@@ -30,6 +30,7 @@ async function gengaleryAPI(data){
                 let editionPhoto = document.createElement("p");
                 trashCan.classList.add("fa-solid");
                 trashCan.classList.add("fa-trash-can");
+                trashCan.setAttribute("data-id", value[count2].id);
                 moveArrow.classList.add("fa-solid");
                 moveArrow.classList.add("fa-up-down-left-right");
                 imageModal.src = value[count2].imageUrl;
