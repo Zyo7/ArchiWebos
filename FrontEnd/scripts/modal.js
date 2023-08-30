@@ -1,6 +1,5 @@
 let modalStatut = null;
 let submitModal = document.getElementById("submitModal");
-submitModal.classList.add("submitNOGO");
 let ajoutData = document.getElementById("formModal");
 let submitStatut = false;
 let categorieValue = 0;
@@ -8,11 +7,10 @@ let titleStatut = document.getElementById("titre");
 let fileStatut = document.getElementById("image");
 let categorieStatut = document.getElementById("categorie");
 let deleteGalerie = document.querySelector(".galerieModal");
-const bearerTest = "Bearer " + token;
 
 
 //Gestion de la Modal
-const openModal = (e) => {
+function openModal(e) {
     e.preventDefault();
     const target = document.querySelector(e.target.getAttribute('href'));
     target.style.display = "flex";
@@ -97,16 +95,24 @@ ajoutData.addEventListener("change", (e) => {
         submitModal.classList.remove("submitGO");
         submitModal.classList.add("submitNOGO");
     }
-    //modification de l'icone au chargement de l'image
-    /*
-    if(fileStatut.files && fileStatut.files[0]){
-        const preview = new FileReader();
-        preview.onload = function (e) {
-            console.log("ça marche");
-            document.getElementById("imgUpload").src = e.target.result;
-        }
+})
+
+fileStatut.addEventListener("change", (e) =>{
+    let imgUpload = document.getElementById("imgUpload");
+    let buttonUpload = document.querySelector(".buttonUpload");
+    let infoSize = document.querySelector(".infoSize");
+    if(fileStatut.files.length != 0){
+        imgUpload.src = window.URL.createObjectURL(fileStatut.files[0]);
+        buttonUpload.style["display"] = "none";
+        infoSize.style["display"] = "none";
+        imgUpload.classList.add("imgPreview");
     }
-    */
+    else{
+        imgUpload.src = "assets/icons/picture-svg-img.png";
+        imgUpload.classList.remove("imgPreview");
+        buttonUpload.style["display"] = "block";
+        infoSize.style["display"] = "block";
+    }
 })
 
 ajoutData.addEventListener("submit", (e) => {
@@ -124,7 +130,6 @@ ajoutData.addEventListener("submit", (e) => {
         document.getElementById("required").style["display"] = "block";
         return;
     }
-    console.log(categorieStatut.value);
     switch (categorieStatut.value) {
         case "Objets":
             categorieValue = 1;
@@ -151,13 +156,14 @@ ajoutData.addEventListener("submit", (e) => {
             'Accept': 'application/json',
             //'Access-Control-Allow-Origin':'*',
             //'Content-Type': 'multipart/form-data',
-            'Authorization': bearerTest
+            'Authorization': "Bearer " + token
         }),
         body: dataApi
     }).then(function (res){
-        return ;
+        gengaleryAPI(selectedName);
+        return res;
     }).catch(function (error){
-        alert("Non envoyé");
+        alert("Non envoyé:", error);
     })
     console.log("La page n'a pas été actualisé");
 
@@ -165,8 +171,6 @@ ajoutData.addEventListener("submit", (e) => {
 })
 
 deleteGalerie.addEventListener("click", (e) => {
-    console.log(e.target);
-    console.log(e.target.dataset.id);
     const deleteAPI = new FormData();
     deleteAPI.append("id", e.target.dataset.id)
     fetch(`http://localhost:5678/api/works/${e.target.dataset.id}`, {
@@ -175,8 +179,13 @@ deleteGalerie.addEventListener("click", (e) => {
             'Accept': '*/*',
             //'Access-Control-Allow-Origin':'*',
             //'Content-Type': 'multipart/form-data',
-            'Authorization': bearerTest
+            'Authorization': "Bearer " + token
         })
+    }).then(function (res){
+        gengaleryAPI(selectedName);
+        return res;
+    }).catch(function (error){
+        alert("Non envoyé:", error);
     })
 })
 

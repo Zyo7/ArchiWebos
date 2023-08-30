@@ -105,10 +105,12 @@
 				<h2 class="titleModal">Ajout photo</h2>
 				<form method="post" id="formModal" class="modalFormAjout" name="FormModal" action="#">
 					<div class="divUpload">
-						<img src="assets/icons/picture-svg-img.png" alt="Icone par défaut" id="imgUpload">
-						<button class="buttonUpload">+ Ajouter photo</button>
+						<div class="containerUpload">
+							<img src="assets/icons/picture-svg-img.png" alt="Icone par défaut" id="imgUpload">
+							<button class="buttonUpload">+ Ajouter photo</button>
+							<p class="infoSize">jpg, png : 4mo max</p>
+						</div>
 						<input type="file" name="image" id="image" accept="image/jpeg,image/png,image/jpg">
-						<p>jpg, png : 4mo max</p>
 					</div>
 					<label for="titre">Titre</label>
 					<input type="text" name="titre" id="titre">
@@ -120,7 +122,7 @@
 						<option>Hotels & restaurants</option>
 					</select>
 					<div class="separateur"></div>					
-					<input type="submit" value="Valider" id="submitModal">
+					<input type="submit" value="Valider" id="submitModal" class="submitNOGO">
 					<p id="required">Champs obligatoires</p>
 				</form>
 			</div>

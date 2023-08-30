@@ -459,10 +459,17 @@ footer {
 	cursor: pointer;
 }
 
-.divUpload #imgUpload {
-	position: absolute;
-	top: 15px;
-	left: 40.5%;
+.containerUpload {
+    width: 170px;
+    margin-left: 125px;
+    display: flex;
+    height: 169px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.divUpload .imgPreview{
+	max-height: 100%;
 }
 
 .divUpload #image{
@@ -474,9 +481,6 @@ footer {
 }
 
 .divUpload .buttonUpload{
-	position: absolute;
-	top: 95px;
-	left:30%;
 	border: none;
 	border-radius: 50px;
 	font-family: 'Work Sans';
@@ -489,9 +493,6 @@ footer {
 }
 
 .divUpload p {
-	position: absolute;
-	top: 145px;
-	left: 39%;
 	color: #444444;
 	font-family: 'Work Sans';
 	font-size: 10px;

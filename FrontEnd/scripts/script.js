@@ -19,3 +19,4 @@ let galery = document.querySelector(".galery");
 let modal = document.querySelector(".galerieModal");
 let selectedName = "Tous";
 let logIn = false;
+
