@@ -1,3 +1,5 @@
+divUpload.appendChild(uploadFile);
+
 async function gengaleryAPI(data){
     await fetch("http://localhost:5678/api/works", {
         method: 'GET',

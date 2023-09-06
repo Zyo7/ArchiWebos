@@ -1,6 +1,3 @@
-const buttonLogin = document.getElementById('submit');
-const formLogin = document.getElementById("formLogin");
-
 formLogin.addEventListener("change", () =>{
     let emailChange = document.getElementById("email");
     let pwdChange = document.getElementById("password");

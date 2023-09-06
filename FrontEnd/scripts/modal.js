@@ -1,14 +1,3 @@
-let modalStatut = null;
-let submitModal = document.getElementById("submitModal");
-let ajoutData = document.getElementById("formModal");
-let submitStatut = false;
-let categorieValue = 0;
-let titleStatut = document.getElementById("titre");
-let fileStatut = document.getElementById("image");
-let categorieStatut = document.getElementById("categorie");
-let deleteGalerie = document.querySelector(".galerieModal");
-
-
 //Gestion de la Modal
 function openModal(e) {
     e.preventDefault();
@@ -39,9 +28,8 @@ const returnModal = (e) => {
     submitModal.classList.add("submitNOGO");
 }
 
-const closeModal = (e) => {
-    if (modalStatut === null) return;
-    e.preventDefault();
+function closeModalFunction() {
+    document.getElementById("formModal").reset();
     modalStatut.querySelector(".modalGalerie").style.display = "flex";
     modalStatut.querySelector(".modalAjout").style.display = "none";
     modalStatut.style.display = "none";
@@ -49,10 +37,31 @@ const closeModal = (e) => {
     modalStatut.setAttribute('aria-modal', false);
     document.getElementById("formModal").reset();
     submitModal.classList.add("submitNOGO");
+    divUpload.style.removeProperty("border");
+    imgUpload.src = "assets/icons/picture-svg-img.png";
+    imgUpload.classList.remove("imgPreview");
+    buttonUpload.style["display"] = "block";
+    infoSize.style["display"] = "block";
+    infoSize.style["color"] = "#444444";
+    infoSize.style["font-weight"] = "400";
+    infoSize.style["font-size"] = "10";
+    titleStatut.style.removeProperty("border");
+    categorieStatut.style.removeProperty("border");
+    document.getElementById("required").style["display"] = "none";
+    submitStatut = false;
+    submitModal.classList.remove("submitGO");
+    submitModal.classList.add("submitNOGO");
     modalStatut.removeEventListener('click', closeModal);
     modalStatut.querySelector(".close-modal1").removeEventListener("click", closeModal);
     modalStatut.querySelector(".close-modal2").removeEventListener("click", closeModal);
     modalStatut.querySelector(".modal-stop").removeEventListener("click", stopPropagation);
+}
+
+
+const closeModal = (e) => {
+    if (modalStatut === null) return;
+    e.preventDefault();
+    closeModalFunction();
     modalStatut = null;
 }
 
@@ -81,10 +90,7 @@ ajoutData.addEventListener("change", (e) => {
     if(categorieStatut.value.length != 0){
         categorieStatut.style.removeProperty("border");
     }
-    if(fileStatut.files.length != 0){
-        document.querySelector(".divUpload").style.removeProperty("border");
-    }
-    if (fileStatut.files.length != 0 && titleStatut.value.length != 0 && categorieStatut.value != "") {
+    if (fileStatut.files.length != 0 && fileStatut.files[0].size <= 4194304 && titleStatut.value.length != 0 && categorieStatut.value != "") {
         submitStatut = true;
         document.getElementById("required").style["display"] = "none";
         submitModal.classList.add("submitGO");
@@ -98,14 +104,24 @@ ajoutData.addEventListener("change", (e) => {
 })
 
 fileStatut.addEventListener("change", (e) =>{
-    let imgUpload = document.getElementById("imgUpload");
-    let buttonUpload = document.querySelector(".buttonUpload");
-    let infoSize = document.querySelector(".infoSize");
     if(fileStatut.files.length != 0){
-        imgUpload.src = window.URL.createObjectURL(fileStatut.files[0]);
-        buttonUpload.style["display"] = "none";
-        infoSize.style["display"] = "none";
-        imgUpload.classList.add("imgPreview");
+        if(fileStatut.files[0].size > 4194304){
+            document.getElementById("image").remove();
+            divUpload.appendChild(uploadFile);
+            infoSize.style["color"] = "red";
+            infoSize.style["font-weight"] = "800";
+            infoSize.style["font-size"] = "12";
+        }
+        else{
+            divUpload.style.removeProperty("border");
+            imgUpload.src = window.URL.createObjectURL(fileStatut.files[0]);
+            buttonUpload.style["display"] = "none";
+            infoSize.style["color"] = "#444444";
+            infoSize.style["font-weight"] = "400";
+            infoSize.style["font-size"] = "10";
+            infoSize.style["display"] = "none";
+            imgUpload.classList.add("imgPreview");
+        }
     }
     else{
         imgUpload.src = "assets/icons/picture-svg-img.png";
@@ -154,20 +170,16 @@ ajoutData.addEventListener("submit", (e) => {
         method: 'POST',
         headers: new Headers({
             'Accept': 'application/json',
-            //'Access-Control-Allow-Origin':'*',
-            //'Content-Type': 'multipart/form-data',
             'Authorization': "Bearer " + token
         }),
         body: dataApi
     }).then(function (res){
         gengaleryAPI(selectedName);
+        closeModalFunction();
         return res;
     }).catch(function (error){
         alert("Non envoyé:", error);
     })
-    console.log("La page n'a pas été actualisé");
-
-
 })
 
 deleteGalerie.addEventListener("click", (e) => {
@@ -177,8 +189,6 @@ deleteGalerie.addEventListener("click", (e) => {
         method: 'DELETE',
         headers: new Headers({
             'Accept': '*/*',
-            //'Access-Control-Allow-Origin':'*',
-            //'Content-Type': 'multipart/form-data',
             'Authorization': "Bearer " + token
         })
     }).then(function (res){
@@ -188,11 +198,3 @@ deleteGalerie.addEventListener("click", (e) => {
         alert("Non envoyé:", error);
     })
 })
-
-
-
-
-
-
-
-

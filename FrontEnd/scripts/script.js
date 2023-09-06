@@ -1,13 +1,3 @@
-//console.log(token);
-
-/*
-async function logMovies() {
-    const response = await fetch("http://example.com/movies.json");
-    const movies = await response.json();
-    console.log(movies);
-}
-*/
-
 let token = window.localStorage.getItem("token");
 let login = false;
 let displayOff = document.querySelectorAll(".Off");
@@ -19,4 +9,26 @@ let galery = document.querySelector(".galery");
 let modal = document.querySelector(".galerieModal");
 let selectedName = "Tous";
 let logIn = false;
-
+let imgUpload = document.getElementById("imgUpload");
+let buttonUpload = document.querySelector(".buttonUpload");
+let infoSize = document.querySelector(".infoSize");
+let uploadFile = document.createElement("input");
+uploadFile.setAttribute("type", "file");
+uploadFile.setAttribute("name", "image");
+uploadFile.setAttribute("id", "image");
+uploadFile.setAttribute("accept", "image/jpeg,image/png,image/jpg");
+let divUpload = document.querySelector(".divUpload");
+if(divUpload !== null){
+    divUpload.appendChild(uploadFile);
+}
+const buttonLogin = document.getElementById('submit');
+const formLogin = document.getElementById("formLogin");
+let modalStatut = null;
+let submitModal = document.getElementById("submitModal");
+let ajoutData = document.getElementById("formModal");
+let submitStatut = false;
+let categorieValue = 0;
+let titleStatut = document.getElementById("titre");
+let fileStatut = document.getElementById("image");
+let categorieStatut = document.getElementById("categorie");
+let deleteGalerie = document.querySelector(".galerieModal");
